@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saathi — On-Screen Smartphone Companion for Parents</title>
+  <meta name="description" content="An on-screen Hindi, English and Kannada smartphone helper for parents. Points at the exact button one calm step at a time. Never taps, types or swipes for her." />
+  <style>
+    :root {
+      --bg: #FFF8EF;
+      --card: #FFFFFF;
+      --teal: #0F5E5C;
+      --teal-soft: #EAF4F3;
+      --orange: #E8730C;
+      --orange-soft: #FFF3E0;
+      --gold: #FFB547;
+      --green: #23A455;
+      --ink: #1F1A14;
+      --muted: #5A5046;
+      --border: #EADFD0;
+      --shadow: 0 12px 32px rgba(31, 26, 20, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Kannada", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+    /* Top Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 248, 239, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--teal);
+    }
+    .brand svg { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .nav-links { display: flex; align-items: center; gap: 18px; font-weight: 600; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--orange); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15, 94, 92, 0.18); }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-accent { background: var(--orange); color: #fff; }
+    .btn-outline { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+    .btn-sm { padding: 8px 16px; font-size: 0.88rem; }
+
+    /* Hero */
+    .hero { padding: 56px 0 40px; }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      align-items: center;
+    }
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2.1rem, 4vw, 3.1rem);
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+    h1 span { color: var(--teal); }
+    .hero-sub {
+      font-size: 1.14rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .rule-callout {
+      background: var(--orange-soft);
+      border-left: 4px solid var(--orange);
+      padding: 12px 16px;
+      border-radius: 0 12px 12px 0;
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 26px;
+    }
+    .cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+
+    /* Sideload helper details */
+    details.install-help {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 560px;
+    }
+    details.install-help summary {
+      font-weight: 700;
+      color: var(--teal);
+      cursor: pointer;
+    }
+    details.install-help ol { margin: 10px 0 6px 20px; }
+    details.install-help code {
+      background: #F3EFEA;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      color: var(--ink);
+    }
+
+    /* Interactive Phone Simulator */
+    .sim-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .scenario-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .tab-btn {
+      padding: 7px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+    }
+    .tab-btn.active {
+      background: var(--teal);
+      color: #fff;
+      border-color: var(--teal);
+    }
+    .phone-frame {
+      width: 320px;
+      height: 590px;
+      background: #1A1A1A;
+      border-radius: 38px;
+      padding: 12px;
+      box-shadow: 0 22px 50px rgba(31, 26, 20, 0.22);
+      position: relative;
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #F6F7F9;
+      border-radius: 28px;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .status-bar {
+      height: 28px;
+      padding: 0 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #EAECEF;
+      color: #333;
+    }
+    .app-header {
+      padding: 12px 16px;
+      font-weight: 800;
+      font-size: 1rem;
+      background: #fff;
+      border-bottom: 1px solid #E5E7EB;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .app-body {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      position: relative;
+    }
+    .mock-row {
+      background: #fff;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .mock-row.hidden-chat {
+      color: #8A7F73;
+      background: #F3EFEA;
+      border-style: dashed;
+      font-family: monospace;
+      font-size: 0.82rem;
+    }
+    .mock-fab {
+      position: absolute;
+      right: 16px;
+      bottom: 148px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Spotlight Ring */
+    .spotlight {
+      border: 3px solid var(--orange) !important;
+      box-shadow: 0 0 0 4px rgba(232, 115, 12, 0.25), 0 0 0 400px rgba(0, 0, 0, 0.28);
+      z-index: 10;
+      animation: pulseRing 1.5s infinite ease-in-out;
+    }
+    @keyframes pulseRing {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(232, 115, 12, 0.35), 0 0 0 400px rgba(0, 0, 0, 0.26); }
+      50% { box-shadow: 0 0 0 9px rgba(232, 115, 12, 0.12), 0 0 0 400px rgba(0, 0, 0, 0.26); }
+    }
+
+    /* Floating Saathi Panel inside Phone */
+    .saathi-overlay {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      z-index: 20;
+      background: var(--bg);
+      border: 2px solid var(--orange);
+      border-radius: 18px;
+      padding: 10px 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+    }
+    .saathi-overlay-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 5px;
+    }
+    .saathi-overlay-top svg { width: 34px; height: 34px; flex-shrink: 0; }
+    .saathi-access-note {
+      font-size: 0.7rem;
+      font-weight: 800;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+    .saathi-heard { font-size: 0.76rem; color: var(--muted); }
+    .saathi-say { font-size: 0.92rem; font-weight: 700; color: var(--ink); line-height: 1.35; }
+    .saathi-meta {
+      margin-top: 7px;
+      padding-top: 6px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--teal);
+    }
+    .speak-btn {
+      background: var(--teal);
+      color: #fff;
+      border: none;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Stats Strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 28px 0 56px;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .stat-num { font-size: 1.85rem; font-weight: 800; color: var(--teal); line-height: 1.15; }
+    .stat-label { font-size: 0.88rem; color: var(--muted); margin-top: 4px; font-weight: 600; }
+
+    /* Sections */
+    section { padding: 44px 0; }
+    .section-head { text-align: center; max-width: 720px; margin: 0 auto 34px; }
+    .section-head h2 { font-size: 2rem; margin-bottom: 10px; }
+    .section-head p { color: var(--muted); font-size: 1.05rem; }
+
+    /* Video Container */
+    .video-box {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 24px;
+      padding: 14px;
+      box-shadow: var(--shadow);
+    }
+    .video-aspect {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      background: #1F1A14;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .video-aspect iframe, .video-placeholder {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .video-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      padding: 24px;
+      text-align: center;
+    }
+
+    /* 3-Tier Cards */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+    .tier-tag {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .tier-1 { background: #E7F6EC; color: var(--green); }
+    .tier-2 { background: var(--teal-soft); color: var(--teal); }
+    .tier-3 { background: var(--orange-soft); color: var(--orange); }
+    .card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .card p { color: var(--muted); font-size: 0.94rem; }
+
+    /* Safety Table */
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      overflow-x: auto;
+      box-shadow: var(--shadow);
+    }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 15px 18px; border-bottom: 1px solid var(--border); font-size: 0.94rem; }
+    th { background: var(--teal-soft); color: var(--teal); font-weight: 800; }
+    tr:last-child td { border-bottom: none; }
+    td code {
+      background: #F3EFEA;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+    }
+
+    /* Languages Banner */
+    .lang-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 18px;
+    }
+    .lang-pill {
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      background: var(--card);
+      border: 2px solid var(--teal);
+      color: var(--teal);
+    }
+    .lang-pill.soon {
+      border-color: var(--border);
+      color: #9A9088;
+      background: #F3EFEA;
+      font-weight: 600;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: left; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .grid-3 { grid-template-columns: 1fr; }
+      .nav-links .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reusable Saathi Mascot SVG (exact port of ic_launcher_fg.xml) -->
+  <svg style="display:none">
+    <symbol id="saathi-avatar" viewBox="0 0 108 108">
+      <circle cx="54" cy="54" r="52" fill="#FFB547" stroke="#E8730C" stroke-width="4"/>
+      <circle cx="54" cy="20" r="9" fill="#2E1C14"/>
+      <path fill="#2E1C14" d="M30,56a24,26 0 1,1 48,0l0,6l-48,0z"/>
+      <ellipse cx="54" cy="59" rx="20" ry="23" fill="#C98A5E"/>
+      <ellipse cx="46" cy="55.4" rx="2.8" ry="3.4" fill="#2E1C14"/>
+      <ellipse cx="62" cy="55.4" rx="2.8" ry="3.4" fill="#2E1C14"/>
+      <circle cx="54" cy="46" r="2.2" fill="#C8102E"/>
+      <path d="M46,66q8,8 16,0" fill="none" stroke="#7A2E1D" stroke-width="2.8" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <svg><use href="#saathi-avatar"/></svg>
+        <span>Saathi</span>
+      </a>
+      <div class="nav-links">
+        <a href="#demo-video" class="hide-mobile">Demo Video</a>
+        <a href="#architecture" class="hide-mobile">3-Tier Architecture</a>
+        <a href="#safety" class="hide-mobile">Privacy & Safety</a>
+        <a id="nav-github" href="https://github.com/bhavytaggarwal/Saathi" target="_blank" rel="noopener" class="btn btn-outline btn-sm">GitHub Repo</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="pill-badge">🇮🇳 Built on Vertex AI Gemini 4 + Google Cloud Run (asia-south1)</div>
+          <h1>A patient on-screen helper for <span>parents new to smartphones.</span></h1>
+          <p class="hero-sub">
+            Saathi floats over allowed apps, speaks <strong>हिन्दी (Hinglish), English, or ಕನ್ನಡ</strong>, points at the exact button with a spotlight ring and arrow, and speaks one short 8–10 word step at a time.
+          </p>
+          <div class="rule-callout">
+            🔒 <strong>Teach, Never Touch:</strong> Saathi never taps, types, or swipes for her—enforced at build time by Gradle (<code>auditReadOnly</code>) and Android OS permissions.
+          </div>
+
+          <div class="cta-row">
+            <a id="apk-btn" href="https://github.com/bhavytaggarwal/Saathi/releases/latest" target="_blank" rel="noopener" class="btn btn-accent">
+              ⬇ Download Android APK (v0.1.1 · ~165 KB)
+            </a>
+            <a href="#demo-video" class="btn btn-primary">▶ Watch Real-Phone Demo</a>
+            <a href="https://github.com/bhavytaggarwal/Saathi" target="_blank" rel="noopener" class="btn btn-outline">View Source Code</a>
+          </div>
+
+          <details class="install-help">
+            <summary>📲 Installing on Android 13–16? Read this 20-second setup note</summary>
+            <ol>
+              <li>Because Saathi uses read-only <strong>Accessibility</strong> to highlight buttons, Android 13+ locks the switch on sideloaded APKs by default.</li>
+              <li>Open <strong>Settings → Accessibility → Saathi</strong> once, then go to <strong>Settings → Apps → Saathi → ⋮ (top-right) → Allow restricted settings</strong>, and switch Saathi on.</li>
+              <li>Or install over USB with zero prompts: <code>adb install -r saathi-v0.1.1.apk</code></li>
+            </ol>
+          </details>
+        </div>
+
+        <!-- INTERACTIVE SIMULATOR -->
+        <div class="sim-wrap">
+          <div class="scenario-tabs">
+            <button class="tab-btn active" onclick="setScenario(0)">1. Settings (हिन्दी)</button>
+            <button class="tab-btn" onclick="setScenario(1)">2. WhatsApp Safe Mode</button>
+            <button class="tab-btn" onclick="setScenario(2)">3. Auto Bank Step-Out</button>
+            <button class="tab-btn" onclick="setScenario(3)">4. Kannada (ಕನ್ನಡ)</button>
+          </div>
+
+          <div class="phone-frame">
+            <div class="phone-screen" id="sim-screen">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY METRICS -->
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-num">~165 KB</div>
+          <div class="stat-label">Zero-Dependency Kotlin APK (minSdk 26)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Eval Suite Pass Rate · 0 Safety Violations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">87</div>
+          <div class="stat-label">On-Device Privacy, Guide & Language Tests</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">0 Keys</div>
+          <div class="stat-label">Zero Client Gemini Keys · Cloud Run IAM Proxy</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMO VIDEO -->
+    <section id="demo-video">
+      <div class="section-head">
+        <h2>Watch Saathi on a Real Android Phone</h2>
+        <p>Voice-guided onboarding, live cross-app pointing with 1000ms auto-advance, WhatsApp buttons-only consent, and automatic Bank Mode step-out.</p>
+      </div>
+      <div class="video-box">
+        <div class="video-aspect" id="video-container">
+          <!-- Automatically replaced if YOUTUBE_EMBED_URL is set -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 3-TIER ARCHITECTURE -->
+    <section id="architecture">
+      <div class="section-head">
+        <h2>3-Tier Edge-to-Cloud Architecture on Google Cloud</h2>
+        <p>Every utterance is answered at the fastest, safest, and lowest-cost tier—routing seamlessly from on-device Kotlin parsers to Vertex AI on Cloud Run.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <span class="tier-tag tier-1">TIER 1 · ON-DEVICE EDGE (&lt;50 ms · ₹0)</span>
+          <h3>Local Parser & Prepared Guides</h3>
+          <p><code>LocalCommandParser.kt</code>, <code>tryLocalDomMatch()</code>, and <code>Guides.kt</code> resolve list reads/clears, explicit-time reminders/alarms, exact button lookups, and multi-step WhatsApp flows completely offline.</p>
+        </div>
+        <div class="card">
+          <span class="tier-tag tier-2">TIER 2 · VERTEX AI FLASH-LITE (MINIMAL)</span>
+          <h3><code>gemini-3.5-flash-lite</code></h3>
+          <p>Handles conversational turns, grocery/reminder slot extraction, clarifications, and routine DOM-only screens (Settings, Play Store) with explicit context caching and sub-second speed.</p>
+        </div>
+        <div class="card">
+          <span class="tier-tag tier-3">TIER 3 · VERTEX AI GEMINI 4 (LOW / MEDIUM)</span>
+          <h3><code>gemini-4-hydrogen</code></h3>
+          <p>Escalates automatically on dense/unfamiliar UIs, 540px compressed screenshots, wrong-turn recovery, WhatsApp <code>controls_only</code> screens, and Hindi/Kannada scam & social-engineering checks.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SAFETY & PRIVACY -->
+    <section id="safety">
+      <div class="section-head">
+        <h2>Deterministic Privacy & Safety — Enforced in Code</h2>
+        <p>Unlike raw pixel screen-sharing, Saathi enforces strict boundaries on the phone before a single token reaches the cloud.</p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Protection Layer</th>
+              <th>How It Works in Saathi's Codebase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Read-Only by Construction</strong></td>
+              <td><code>canPerformGestures</code> is omitted from XML, and the Gradle <code>auditReadOnly</code> task fails every build if click, gesture, or text-injection APIs appear anywhere in source.</td>
+            </tr>
+            <tr>
+              <td><strong>Automatic Bank & Checkout Step-Out</strong></td>
+              <td>Opening strict banking/UPI apps (YONO SBI, HDFC, iMobile, Axis, Kotak, bob World, PNB, GPay, PhonePe, Paytm) or Flipkart/Amazon checkout payment screens speaks a calm reassurance and calls <code>disableSelf()</code> immediately.</td>
+            </tr>
+            <tr>
+              <td><strong>WhatsApp Ask-First + <code>ControlsOnly</code></strong></td>
+              <td>Nothing is read until she says <em>"Haan"</em>. Even then, names, chats, timestamps, and typed text become <code>[hidden]</code>—only verified safe button labels leave the phone, and never screenshots.</td>
+            </tr>
+            <tr>
+              <td><strong>Multilingual PII & Spoken-Digit Masking</strong></td>
+              <td><code>PrivacyFilter.kt</code> masks UPI IDs, amounts, emails, and 4+ digit runs—including spoken number words in Hindi, English, and Kannada (<em>"ek do teen char"</em> / <em>"ಒಂದು ಎರಡು ಮೂರು ನಾಲ್ಕು"</em>) before network calls.</td>
+            </tr>
+            <tr>
+              <td><strong>Zero Raw Logs + Firestore Quotas</strong></td>
+              <td>Cloud Run enforces constant-time secret checks, per-IP burst limits, 200/day per-device & 2,000/day global Firestore caps, <code>store: false</code>, and one-tap <em>"Galat hai / Report"</em> trace flagging to Firestore.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section>
+      <div class="section-head">
+        <h2>Built for Indian Families</h2>
+        <p>Setup starts in her own script—configuring speech recognition, offline voice packs, spatial UI directions, and privacy shields together.</p>
+        <div class="lang-strip">
+          <span class="lang-pill">हिन्दी (Hindi & Hinglish) ✓</span>
+          <span class="lang-pill">English (en-IN) ✓</span>
+          <span class="lang-pill">ಕನ್ನಡ (Kannada) ✓</span>
+          <span class="lang-pill soon">తెలుగు · Coming soon</span>
+          <span class="lang-pill soon">தமிழ் · Coming soon</span>
+          <span class="lang-pill soon">मराठी · Coming soon</span>
+          <span class="lang-pill soon">বাংলা · Coming soon</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>Saathi</strong> (<code>in.getsaathi.app</code>) · Native Kotlin Android + FastAPI on Google Cloud Run + Vertex AI + Firestore</p>
+      <p style="margin-top:6px;">
+        <a href="https://github.com/bhavytaggarwal/Saathi" target="_blank" rel="noopener">GitHub Repository</a> ·
+        <a href="/healthz">Cloud Run Health Status</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ================= CONFIG (Update URLs here) =================
+    const CONFIG = {
+      APK_DOWNLOAD_URL: "https://github.com/bhavytaggarwal/Saathi/releases/latest",
+      // Paste your YouTube embed URL here once uploaded, e.g. "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      YOUTUBE_EMBED_URL: ""
+    };
+    // =============================================================
+
+    document.getElementById("apk-btn").href = CONFIG.APK_DOWNLOAD_URL;
+
+    const videoContainer = document.getElementById("video-container");
+    if (CONFIG.YOUTUBE_EMBED_URL) {
+      videoContainer.innerHTML = `<iframe src="${CONFIG.YOUTUBE_EMBED_URL}" title="Saathi Demo Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    } else {
+      videoContainer.innerHTML = `
+        <div class="video-placeholder">
+          <svg style="width:60px;height:60px;margin-bottom:12px;"><use href="#saathi-avatar"/></svg>
+          <h3 style="font-size:1.25rem;margin-bottom:6px;">Real-Phone Walkthrough Video</h3>
+          <p style="color:#D6CEC2;max-width:460px;font-size:0.94rem;">
+            Demonstrating Hindi/Kannada onboarding, live spotlight pointing, WhatsApp Controls-Only mode, and Automatic Bank Mode step-out.
+          </p>
+        </div>`;
+    }
+
+    const SCENARIOS = [
+      {
+        app: "Settings",
+        heard: 'Her: "Bluetooth chalu karna hai"',
+        note: "",
+        say: "Upar se teesri line mein Bluetooth dabaiye.",
+        speech: "ऊपर से तीसरी लाइन में Bluetooth दबाइए।",
+        lang: "hi-IN",
+        tier: "Tier 2 · gemini-3.5-flash-lite",
+        rows: [
+          { label: "Wi-Fi", sub: "On" },
+          { label: "Mobile network", sub: "Jio 5G" },
+          { label: "Bluetooth", sub: "Off", highlight: true },
+          { label: "Display and brightness", sub: "" }
+        ]
+      },
+      {
+        app: "WhatsApp",
+        heard: 'Her: "WhatsApp mein naya number save karna hai"',
+        note: "WhatsApp: sirf buttons dekh rahi hoon",
+        say: "Neeche right mein hara gol button dabaiye, jisme chat ka nishaan hai.",
+        speech: "नीचे right में हरा गोल button दबाइए, जिसमें chat का निशान है।",
+        lang: "hi-IN",
+        tier: "Tier 1 · On-Device Guide (<50ms)",
+        fabHighlight: true,
+        rows: [
+          { label: "[hidden] · Private chat row", hidden: true },
+          { label: "[hidden] · Private chat row", hidden: true },
+          { label: "[hidden] · OTP preview masked", hidden: true }
+        ]
+      },
+      {
+        app: "YONO SBI (Strict Bank Mode)",
+        heard: "Foreground detected: com.sbi.lotusintouch",
+        note: "AUTO STEP-OUT · disableSelf()",
+        say: "Suraksha ke liye Saathi band kar diya hai. Ab back jaakar ek baar phir se app kholein.",
+        speech: "सुरक्षा के लिए साथी बंद कर दिया है। अब back जाकर एक बार फिर से app खोलें।",
+        lang: "hi-IN",
+        tier: "On-Device Guardrail · 0 Cloud Calls",
+        rows: [
+          { label: "🛡️ Overlays Removed Immediately", sub: "" },
+          { label: "🔕 Accessibility Service Switched Off", sub: "" },
+          { label: "📲 1-Tap Re-Enable Notification Posted", sub: "" }
+        ]
+      },
+      {
+        app: "Settings (ಕನ್ನಡ)",
+        heard: 'Her: "ಬ್ಲೂಟೂತ್ ಆನ್ ಮಾಡಬೇಕು"',
+        note: "Language: ಕನ್ನಡ (kn-IN)",
+        say: "ಮೇಲಿನಿಂದ ಮೂರನೇ ಸಾಲಿನಲ್ಲಿ Bluetooth ಒತ್ತಿ.",
+        speech: "ಮೇಲಿನಿಂದ ಮೂರನೇ ಸಾಲಿನಲ್ಲಿ Bluetooth ಒತ್ತಿ.",
+        lang: "kn-IN",
+        tier: "Tier 2 · Native Script Checked",
+        rows: [
+          { label: "Wi-Fi", sub: "On" },
+          { label: "Mobile network", sub: "Airtel" },
+          { label: "Bluetooth", sub: "Off", highlight: true },
+          { label: "Sound and vibration", sub: "" }
+        ]
+      }
+    ];
+
+    let currentIdx = 0;
+
+    function setScenario(idx) {
+      currentIdx = idx;
+      document.querySelectorAll(".tab-btn").forEach((b, i) => b.classList.toggle("active", i === idx));
+      const s = SCENARIOS[idx];
+      const screen = document.getElementById("sim-screen");
+
+      const rowsHtml = s.rows.map(r => `
+        <div class="mock-row ${r.hidden ? 'hidden-chat' : ''} ${r.highlight ? 'spotlight' : ''}">
+          <span>${r.label}</span>
+          <span style="color:#6B7280;font-size:0.8rem;">${r.sub || ""}</span>
+        </div>
+      `).join("");
+
+      const fabHtml = s.fabHighlight
+        ? `<div class="mock-fab spotlight" title="New chat">💬</div>`
+        : "";
+
+      screen.innerHTML = `
+        <div class="status-bar"><span>12:30</span><span>5G · 92%</span></div>
+        <div class="app-header"><span>${s.app}</span><span style="color:#6B7280">⋮</span></div>
+        <div class="app-body">
+          ${rowsHtml}
+          ${fabHtml}
+          <div class="saathi-overlay">
+            <div class="saathi-overlay-top">
+              <svg><use href="#saathi-avatar"/></svg>
+              <div>
+                ${s.note ? `<div class="saathi-access-note">${s.note}</div>` : ""}
+                <div class="saathi-heard">${s.heard}</div>
+              </div>
+            </div>
+            <div class="saathi-say">${s.say}</div>
+            <div class="saathi-meta">
+              <span>${s.tier}</span>
+              <button class="speak-btn" onclick="speakCurrent()">🔊 Hear Voice</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function speakCurrent() {
+      if (!("speechSynthesis" in window)) return;
+      window.speechSynthesis.cancel();
+      const s = SCENARIOS[currentIdx];
+      const u = new SpeechSynthesisUtterance(s.speech);
+      u.lang = s.lang;
+      u.rate = 1.02;
+      window.speechSynthesis.speak(u);
+    }
+
+    setScenario(0);
+  </script>
+</body>
+</html>

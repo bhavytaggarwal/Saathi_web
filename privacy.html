@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Saathi (in.getsaathi.app)</title>
+  <meta name="description" content="Privacy Policy for Saathi, a read-only voice and visual digital companion for older adults and first-time smartphone users in India." />
+  <style>
+    :root {
+      --bg: #FFF8EF;
+      --card: #FFFFFF;
+      --teal: #0F5E5C;
+      --teal-soft: #EAF4F3;
+      --orange: #E8730C;
+      --orange-soft: #FFF3E0;
+      --gold: #FFB547;
+      --green: #23A455;
+      --green-soft: #E7F6EC;
+      --ink: #1F1A14;
+      --muted: #5A5046;
+      --border: #EADFD0;
+      --shadow: 0 12px 32px rgba(31, 26, 20, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans Devanagari", "Noto Sans Kannada", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.68;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--teal); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .policy-container { max-width: 860px; margin: 0 auto; }
+
+    /* Top Nav */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 248, 239, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.35rem;
+      color: var(--teal);
+    }
+    .brand:hover { text-decoration: none; }
+    .brand svg { width: 40px; height: 40px; border-radius: 50%; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+    .nav-links { display: flex; align-items: center; gap: 18px; font-weight: 600; font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--orange); text-decoration: none; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(15, 94, 92, 0.18); text-decoration: none; }
+    .btn-primary { background: var(--teal); color: #fff; }
+    .btn-outline { background: #fff; color: var(--teal); border: 2px solid var(--teal); }
+    .btn-sm { padding: 8px 16px; font-size: 0.88rem; }
+
+    /* Policy Hero */
+    .policy-hero {
+      padding: 48px 0 28px;
+    }
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--teal-soft);
+      color: var(--teal);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    h1 {
+      font-size: clamp(2rem, 3.8vw, 2.85rem);
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      margin-bottom: 14px;
+    }
+    h1 span { color: var(--teal); }
+    .meta-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 20px;
+      align-items: center;
+      font-size: 0.94rem;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+    .meta-strip strong { color: var(--ink); }
+    .rule-callout {
+      background: var(--orange-soft);
+      border-left: 4px solid var(--orange);
+      padding: 14px 18px;
+      border-radius: 0 14px 14px 0;
+      font-weight: 600;
+      font-size: 0.96rem;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    /* Quick Jump TOC */
+    .toc-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
+    }
+    .toc-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+    .toc-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .toc-links a {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 13px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--ink);
+      transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+    }
+    .toc-links a:hover {
+      background: var(--teal-soft);
+      border-color: var(--teal);
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    /* Policy Sections */
+    .policy-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 16px;
+    }
+    .policy-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 30px;
+      box-shadow: var(--shadow);
+      scroll-margin-top: 86px;
+    }
+    .section-tag {
+      display: inline-block;
+      padding: 4px 11px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      background: var(--teal-soft);
+      color: var(--teal);
+    }
+    .section-tag.safe { background: var(--green-soft); color: var(--green); }
+    .section-tag.warn { background: var(--orange-soft); color: var(--orange); }
+
+    .policy-card h2 {
+      font-size: 1.42rem;
+      line-height: 1.3;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .policy-card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+      margin-bottom: 12px;
+    }
+    .policy-card p:last-child { margin-bottom: 0; }
+    .policy-card ul {
+      margin: 10px 0 12px 20px;
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+    .policy-card li { margin-bottom: 8px; }
+    .policy-card li:last-child { margin-bottom: 0; }
+    .policy-card strong { color: var(--ink); }
+
+    code {
+      background: #F3EFEA;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      color: var(--ink);
+      word-break: break-word;
+    }
+
+    .disclosure-box {
+      background: var(--teal-soft);
+      border: 1px solid #C5DFDC;
+      border-radius: 14px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      color: var(--ink);
+      font-size: 0.94rem;
+    }
+    .disclosure-box strong { color: var(--teal); }
+
+    .contact-box {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .contact-box .contact-email {
+      font-size: 1.08rem;
+      font-weight: 800;
+      color: var(--teal);
+    }
+
+    footer {
+      margin-top: 48px;
+      padding: 32px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 720px) {
+      .policy-hero { padding: 34px 0 20px; }
+      .policy-card { padding: 22px 18px; border-radius: 16px; }
+      .toc-card { padding: 16px; }
+      .nav-links .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Reusable Saathi Mascot SVG (exact port of ic_launcher_fg.xml) -->
+  <svg style="display:none">
+    <symbol id="saathi-avatar" viewBox="0 0 108 108">
+      <circle cx="54" cy="54" r="52" fill="#FFB547" stroke="#E8730C" stroke-width="4"/>
+      <circle cx="54" cy="20" r="9" fill="#2E1C14"/>
+      <path fill="#2E1C14" d="M30,56a24,26 0 1,1 48,0l0,6l-48,0z"/>
+      <ellipse cx="54" cy="59" rx="20" ry="23" fill="#C98A5E"/>
+      <ellipse cx="46" cy="55.4" rx="2.8" ry="3.4" fill="#2E1C14"/>
+      <ellipse cx="62" cy="55.4" rx="2.8" ry="3.4" fill="#2E1C14"/>
+      <circle cx="54" cy="46" r="2.2" fill="#C8102E"/>
+      <path d="M46,66q8,8 16,0" fill="none" stroke="#7A2E1D" stroke-width="2.8" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <header>
+    <div class="container nav">
+      <a href="./index.html" class="brand">
+        <svg><use href="#saathi-avatar"/></svg>
+        <span>Saathi</span>
+      </a>
+      <div class="nav-links">
+        <a href="./index.html" class="hide-mobile">Home</a>
+        <a href="./index.html#architecture" class="hide-mobile">Architecture</a>
+        <a href="./index.html#safety" class="hide-mobile">Privacy &amp; Safety</a>
+        <a href="./index.html" class="btn btn-outline btn-sm">← Back to Saathi</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="policy-container">
+      <section class="policy-hero">
+        <div class="pill-badge">🔒 Privacy Policy · Saathi Android App</div>
+        <h1>Privacy Policy for <span>Saathi</span></h1>
+        <div class="meta-strip">
+          <span><strong>Last Updated:</strong> November 27, 2026</span>
+          <span>•</span>
+          <span><strong>App Package:</strong> <code>in.getsaathi.app</code></span>
+        </div>
+
+        <div class="rule-callout">
+          🛡️ <strong>Our Core Promise — Teach, Never Touch:</strong> Saathi is strictly read-only, masks sensitive data on your device before any cloud request, automatically turns off in banking and payment apps, and never sells or logs your personal information.
+        </div>
+
+        <nav class="toc-card" aria-label="Privacy Policy sections">
+          <div class="toc-title">On This Page</div>
+          <div class="toc-links">
+            <a href="#overview">Overview</a>
+            <a href="#accessibility">1. AccessibilityService API</a>
+            <a href="#masking-ai">2. On-Device Masking &amp; AI</a>
+            <a href="#microphone">3. Microphone &amp; Speech</a>
+            <a href="#sound-finder">4. Sound Finder</a>
+            <a href="#storage-quotas">5. Local Storage &amp; Quotas</a>
+            <a href="#deletion-contact">6. Data Deletion &amp; Contact</a>
+          </div>
+        </nav>
+      </section>
+
+      <div class="policy-stack">
+        <!-- OVERVIEW -->
+        <article class="policy-card" id="overview">
+          <span class="section-tag safe">Overview</span>
+          <h2>Overview</h2>
+          <p>
+            <strong>Saathi</strong> ("we", "our", "us") is a read-only voice and visual digital companion built for older adults and first-time smartphone users in India. Saathi helps users navigate everyday smartphone tasks step by step with calm spoken guidance and clear on-screen highlights.
+          </p>
+          <p>
+            Saathi is engineered from the ground up with <strong>strict on-device privacy</strong> and <strong>zero automated tapping</strong>. This Privacy Policy explains what permissions Saathi requests on Android, how data is protected on your device before anything leaves your phone, and how you stay in full control of your information.
+          </p>
+        </article>
+
+        <!-- 1. ACCESSIBILITY SERVICE API -->
+        <article class="policy-card" id="accessibility">
+          <span class="section-tag warn">Section 1 · Prominent Disclosure</span>
+          <h2>1. Android AccessibilityService API (Read-Only)</h2>
+          <p>
+            Saathi uses the Android <code>AccessibilityService</code> API <strong>solely during an active, user-initiated help session</strong> to read on-screen button labels, layout hierarchy, and occasional downscaled screenshots of allowed apps. This allows Saathi to place a visual highlight around the next button and speak short instructions aloud so the user can tap it themselves.
+          </p>
+          <ul>
+            <li>
+              <strong>Strictly Read-Only — Zero Automated Actions:</strong> Saathi <strong>never taps, types, swipes, or performs gestures</strong> on the user's behalf. Gesture and action permissions are omitted from the app configuration, and read-only enforcement is audited at build time.
+            </li>
+            <li>
+              <strong>Automatic Banking &amp; Payment Step-Out:</strong> When strict banking or payment apps open (such as UPI, net-banking, or payment checkout screens), Saathi immediately removes its overlay and automatically disables itself using <code>disableSelf()</code>.
+            </li>
+            <li>
+              <strong>Protected Sensitive Screens &amp; Private Messages:</strong> Saathi <strong>never reads</strong> UPI, PIN, or password screens, SMS messages, Gmail, or WhatsApp message contents. Even when the user explicitly consents to step-by-step button guidance inside WhatsApp, chat names and message contents remain hidden and screenshots are never captured.
+            </li>
+          </ul>
+          <div class="disclosure-box">
+            <strong>Summary for Google Play Disclosure:</strong> The <code>AccessibilityService</code> API is used exclusively to provide read-only visual and spoken navigation assistance during active user-requested sessions. It is never used for remote control, automated clicking, call recording, or harvesting personal messages or financial credentials.
+          </div>
+        </article>
+
+        <!-- 2. ON-DEVICE DATA MASKING & AI PROCESSING -->
+        <article class="policy-card" id="masking-ai">
+          <span class="section-tag">Section 2</span>
+          <h2>2. On-Device Data Masking &amp; AI Processing</h2>
+          <p>
+            Before any request leaves your phone, Saathi runs an on-device privacy filter that automatically detects and masks sensitive personal details—including <strong>phone numbers, financial amounts, email addresses, and UPI IDs</strong> (as well as spoken digit sequences).
+          </p>
+          <p>
+            When cloud assistance is needed to guide you through a screen, only your <strong>masked speech/text queries</strong> and <strong>masked UI labels</strong> (and occasional downscaled screenshots of allowed non-sensitive apps) are transmitted over encrypted <strong>HTTPS</strong> to Saathi's Google Cloud backend powered by <strong>Vertex AI / Gemini</strong>.
+          </p>
+          <p>
+            Our AI backend operates with data storage explicitly disabled (<code>store: false</code>). Your queries and screen context are processed transiently to return the next spoken instruction and are <strong>never logged, retained, used to train AI models, or sold</strong> to any third party.
+          </p>
+        </article>
+
+        <!-- 3. MICROPHONE & SPEECH RECOGNITION -->
+        <article class="policy-card" id="microphone">
+          <span class="section-tag">Section 3</span>
+          <h2>3. Microphone &amp; Speech Recognition</h2>
+          <p>
+            Saathi requests microphone access solely so you can speak your questions naturally in Hindi (Hinglish), English, or Kannada.
+          </p>
+          <p>
+            By default, Saathi uses <strong>Android's on-device speech recognition</strong> so your voice stays on your phone. Voice audio is sent to Google's speech recognition service <strong>only if you explicitly opt into online speech recognition</strong> inside <strong>Advanced Settings</strong>. Saathi does not record audio in the background when you are not actively talking to it.
+          </p>
+        </article>
+
+        <!-- 4. OPTIONAL SOUND FINDER -->
+        <article class="policy-card" id="sound-finder">
+          <span class="section-tag">Section 4</span>
+          <h2>4. Optional Sound Finder (<code>NotificationListenerService</code>)</h2>
+          <p>
+            Notification Access is <strong>completely optional</strong> and disabled by default. It is only requested if you choose to turn on the Sound Finder helper under <strong>Advanced Settings → Sound Finder</strong>.
+          </p>
+          <p>
+            When enabled, this permission is used <strong>exclusively on-device</strong> via Android's <code>MediaSessionManager.getActiveSessions()</code> to identify and tell you which app is currently playing audio (for example, to help locate unexpected video or music playback). <strong>Zero notification titles, messages, sender names, or alerts are ever read, stored, or transmitted.</strong>
+          </p>
+        </article>
+
+        <!-- 5. ON-DEVICE STORAGE, DAILY QUOTAS & VOLUNTARY REPORTS -->
+        <article class="policy-card" id="storage-quotas">
+          <span class="section-tag">Section 5</span>
+          <h2>5. On-Device Storage, Daily Quotas &amp; Voluntary Reports</h2>
+          <ul>
+            <li>
+              <strong>Local-Only Lists &amp; Reminders:</strong> Your shopping lists, to-do lists, and reminders are stored <strong>strictly locally on your device</strong> and are never synced to Saathi's servers.
+            </li>
+            <li>
+              <strong>Anonymous Daily Quotas:</strong> To protect the service from abuse and enforce fair daily usage limits, Saathi stores an anonymous <strong>SHA-256 hash</strong> of the device ID in Google Cloud Firestore solely for rate-limiting and daily quota enforcement. This hash cannot be reversed to reveal your identity, phone number, or Google account.
+            </li>
+            <li>
+              <strong>Voluntary Error Reports:</strong> Saathi stores masked turn context (via <code>/v1/report</code>) <strong>only if you explicitly tap "Galat hai / Report"</strong> to flag an incorrect or confusing instruction so we can fix bugs and improve guidance quality.
+            </li>
+          </ul>
+        </article>
+
+        <!-- 6. DATA DELETION & CONTACT US -->
+        <article class="policy-card" id="deletion-contact">
+          <span class="section-tag safe">Section 6</span>
+          <h2>6. Data Deletion &amp; Contact Us</h2>
+          <p>
+            You are always in complete control of your data:
+          </p>
+          <ul>
+            <li>
+              <strong>Instant Local Deletion:</strong> Uninstalling Saathi or clearing the app's storage in Android Settings (<strong>Settings → Apps → Saathi → Storage → Clear data</strong>) immediately and permanently deletes all local shopping lists, to-do lists, reminders, preferences, and local logs on your device.
+            </li>
+            <li>
+              <strong>Cloud Quota &amp; Report Deletion Requests:</strong> If you have previously submitted a voluntary <code>/v1/report</code> entry or would like us to delete any associated quota records stored in Firestore, please email us with the approximate date/time of the report or request and we will delete the matching records promptly.
+            </li>
+          </ul>
+
+          <div class="contact-box">
+            <!-- Replace with exact Google Play Console developer contact email before submission -->
+            <div><strong>Privacy &amp; Data Deletion Contact</strong></div>
+            <a class="contact-email" href="mailto:support@getsaathi.in">support@getsaathi.in</a>
+            <div style="font-size:0.9rem;color:var(--muted);">
+              Developer: Saathi (<code>in.getsaathi.app</code>) · Website: <a href="https://bhavytaggarwal.github.io/Saathi_web/">bhavytaggarwal.github.io/Saathi_web</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p><strong>Saathi</strong> (<code>in.getsaathi.app</code>) · Native Kotlin Android + FastAPI on Google Cloud Run + Vertex AI + Firestore</p>
+      <p style="margin-top:6px;">
+        <a href="./index.html">Home</a> ·
+        <a href="./privacy.html">Privacy Policy</a> ·
+        <a href="https://github.com/bhavytaggarwal/Saathi" target="_blank" rel="noopener">GitHub Repository</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
